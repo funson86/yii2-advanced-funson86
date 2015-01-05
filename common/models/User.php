@@ -23,8 +23,10 @@ use yii\web\IdentityInterface;
  */
 class User extends ActiveRecord implements IdentityInterface
 {
-    const STATUS_DELETED = 0;
-    const STATUS_ACTIVE = 10;
+    const STATUS_DELETED = -1;
+    const STATUS_INACTIVE = 0;
+    const STATUS_ACTIVE = 1;
+    const ROLE_USER = 10;
 
     /**
      * @inheritdoc
@@ -52,6 +54,29 @@ class User extends ActiveRecord implements IdentityInterface
         return [
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
+
+            ['role', 'default', 'value' => self::ROLE_USER],
+            ['role', 'in', 'range' => [self::ROLE_USER]],
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => Yii::t('app', 'ID'),
+            'username' => Yii::t('app', 'Username'),
+            'password' => Yii::t('app', 'Password'),
+            'repassword' => Yii::t('app', 'Repassword'),
+            'email' => Yii::t('app', 'Email'),
+            'role' => Yii::t('app', 'Role'),
+            'status' => Yii::t('app', 'Status'),
+            'created_at' => Yii::t('app', 'Created At'),
+            'updated_at' => Yii::t('app', 'Updated At'),
+            'create_user_id' => Yii::t('app', 'Create User Id'),
+            'update_user_id' => Yii::t('app', 'Update User Id'),
         ];
     }
 

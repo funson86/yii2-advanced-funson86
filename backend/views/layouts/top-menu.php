@@ -34,6 +34,22 @@ $menuItemsMain = [
         ],
         //'visible' => Yii::$app->user->can('readPost'),
     ],
+    [
+        'label' => '<i class="fa fa-cog"></i> ' . Yii::t('app', 'System'),
+        'url' => ['#'],
+        'active' => false,
+        //'visible' => Yii::$app->user->can('haha'),
+        'items' => [
+            [
+                'label' => '<i class="fa fa-user"></i> ' . Yii::t('app', 'User'),
+                'url' => ['/user'],
+            ],
+            [
+                'label' => '<i class="fa fa-lock"></i> ' . Yii::t('app', 'Role'),
+                'url' => ['/role'],
+            ],
+        ],
+    ],
 ];
 echo Nav::widget([
     'options' => ['class' => 'navbar-nav navbar-left'],
