@@ -1,0 +1,11 @@
+<?php
+namespace api\modules\v0\models;
+
+/**
+ * User Model
+ *
+ * @author Budi Irawan <deerawan@gmail.com>
+ */
+class User extends \common\models\User
+{
+}

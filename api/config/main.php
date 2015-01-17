@@ -12,14 +12,18 @@ return [
     'basePath' => dirname(__DIR__),    
     'bootstrap' => ['log'],
     'modules' => [
+        'v0' => [
+            'basePath' => '@api/modules/v0',
+            'class' => 'api\modules\v0\Module'
+        ],
         'v1' => [
             'basePath' => '@api/modules/v1',
             'class' => 'api\modules\v1\Module'
-        ]
+        ],
     ],
     'components' => [        
         'user' => [
-            'identityClass' => 'common\models\User',
+            'identityClass' => 'api\modules\v0\models\User',
             'enableAutoLogin' => false,
         ],
         'log' => [
@@ -37,20 +41,28 @@ return [
             'showScriptName' => false,
             'rules' => [
                 [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'v0/user',
+                    'extraPatterns' => [
+                        'POST login' => 'login',
+                    ],
+                ],
+                [
                     'class' => 'yii\rest\UrlRule', 
                     'controller' => 'v1/country',
-                    'tokens' => [
-                        '{id}' => '<id:\\w+>'
-                    ]
-                    
                 ],
                 [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => 'v1/user',
-                    'tokens' => [
-                        '{id}' => '<id:\\w+>'
-                    ]
-
+                    //'controller' => ['v1/u' => 'v1/user'],
+                    'extraPatterns' => [
+                        'GET search' => 'search',
+                        'POST login' => 'login',
+                    ],
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'v1/post',
                 ],
             ],
         ]
