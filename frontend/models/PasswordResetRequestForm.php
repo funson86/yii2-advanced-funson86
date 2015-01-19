@@ -1,8 +1,8 @@
 <?php
 namespace frontend\models;
 
-use common\models\User;
 use yii\base\Model;
+use Yii;
 
 /**
  * Password reset request form
@@ -23,8 +23,25 @@ class PasswordResetRequestForm extends Model
             ['email', 'exist',
                 'targetClass' => '\common\models\User',
                 'filter' => ['status' => User::STATUS_ACTIVE],
-                'message' => 'There is no user with such email.'
+                'message' => Yii::t('app', 'There is no user with such email.')
             ],
+        ];
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'id' => Yii::t('app', 'ID'),
+            'username' => Yii::t('app', 'Username'),
+            'password' => Yii::t('app', 'Password'),
+            'repassword' => Yii::t('app', 'Repassword'),
+            'email' => Yii::t('app', 'Email'),
+            'role' => Yii::t('app', 'Role'),
+            'status' => Yii::t('app', 'Status'),
+            'created_at' => Yii::t('app', 'Created At'),
+            'updated_at' => Yii::t('app', 'Updated At'),
+            'create_user_id' => Yii::t('app', 'Create User Id'),
+            'update_user_id' => Yii::t('app', 'Update User Id'),
         ];
     }
 
