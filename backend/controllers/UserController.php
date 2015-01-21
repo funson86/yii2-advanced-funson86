@@ -7,6 +7,7 @@ use backend\models\User;
 use backend\models\UserSearch;
 use yii\filters\AccessControl;
 use yii\web\Controller;
+use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -42,6 +43,8 @@ class UserController extends Controller
      */
     public function actionIndex()
     {
+        //if(!Yii::$app->user->can('viewUser')) throw new ForbiddenHttpException(Yii::t('app', 'No Auth'));
+
         $searchModel = new UserSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $arrayStatus = User::getArrayStatus();
@@ -62,6 +65,8 @@ class UserController extends Controller
      */
     public function actionView($id)
     {
+        //if(!Yii::$app->user->can('viewUser')) throw new ForbiddenHttpException(Yii::t('app', 'No Auth'));
+
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -74,10 +79,12 @@ class UserController extends Controller
      */
     public function actionCreate()
     {
+        //if(!Yii::$app->user->can('createUser')) throw new ForbiddenHttpException(Yii::t('app', 'No Auth'));
+
         $model = new User(['scenario' => 'admin-create']);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->authManager->assign(Yii::$app->authManager->getRole($model->role), $model->id);
+            //Yii::$app->authManager->assign(Yii::$app->authManager->getRole($model->role), $model->id);
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -94,6 +101,8 @@ class UserController extends Controller
      */
     public function actionUpdate($id)
     {
+        //if(!Yii::$app->user->can('updateUser')) throw new ForbiddenHttpException(Yii::t('app', 'No Auth'));
+
         $model = $this->findModel($id);
         $model->setScenario('admin-update');
 
@@ -116,6 +125,8 @@ class UserController extends Controller
      */
     public function actionDelete($id)
     {
+        //if(!Yii::$app->user->can('deleteUser')) throw new ForbiddenHttpException(Yii::t('app', 'No Auth'));
+
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);

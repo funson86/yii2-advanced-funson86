@@ -10,6 +10,7 @@ namespace backend\controllers;
 
 use Yii;
 use yii\filters\AccessControl;
+use yii\web\ForbiddenHttpException;
 use yii\web\HttpException;
 
 use backend\models\Auth;
@@ -42,6 +43,8 @@ class RoleController extends Controller
 
     public function actionIndex()
     {
+        //if(!Yii::$app->user->can('viewRole')) throw new ForbiddenHttpException(Yii::t('app', 'No Auth'));
+
         $searchModel = new AuthSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->get(), Auth::TYPE_ROLE);
         return $this->render('index', [
@@ -52,6 +55,8 @@ class RoleController extends Controller
 
     public function actionCreate()
     {
+        //if(!Yii::$app->user->can('createRole')) throw new ForbiddenHttpException(Yii::t('app', 'No Auth'));
+
         $model = new Auth();
         if ($model->load(Yii::$app->request->post())) {
             $permissions = $this->preparePermissions(Yii::$app->request->post());
@@ -81,6 +86,8 @@ class RoleController extends Controller
 
     public function actionUpdate($name)
     {
+        //if(!Yii::$app->user->can('updateRole')) throw new ForbiddenHttpException(Yii::t('app', 'No Auth'));
+
         if($name == 'admin') {
             Yii::$app->session->setFlash('success', Yii::t('app', 'The Administrator has all permissions'));
             return $this->redirect(['view', 'name' => $name]);
@@ -105,7 +112,7 @@ class RoleController extends Controller
 
     public function actionDelete($name)
     {
-        if(!Yii::$app->user->can('deleteRole')) throw new HttpException(500, 'No Auth');
+        //if(!Yii::$app->user->can('deleteRole')) throw new ForbiddenHttpException(Yii::t('app', 'No Auth'));
 
         if ($name) {
             if(!Auth::hasUsersByRole($name)) {
