@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'password_hash',
             // 'password_reset_token',
             'email:email',
-            [
+            /*[
                 'attribute' => 'role',
                 'value' => function ($model) {
                             return $model->roleLabel;
@@ -41,6 +41,18 @@ $this->params['breadcrumbs'][] = $this->title;
                         $searchModel,
                         'role',
                         $arrayRole,
+                        ['class' => 'form-control', 'prompt' => Yii::t('app', 'Please Filter')]
+                    )
+            ],*/
+            [
+                'attribute' => 'auth_role',
+                'value' => function ($model) {
+                            return $model->authRoleLabel;
+                        },
+                'filter' => Html::activeDropDownList(
+                        $searchModel,
+                        'auth_role',
+                        User::getArrayAuthRole(),
                         ['class' => 'form-control', 'prompt' => Yii::t('app', 'Please Filter')]
                     )
             ],

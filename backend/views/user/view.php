@@ -32,9 +32,13 @@ $this->params['breadcrumbs'][] = $this->title;
             //'password_hash',
             //'password_reset_token',
             'email:email',
-            [
+            /*[
                 'attribute' => 'role',
                 'value' => $model->roleLabel,
+            ],*/
+            [
+                'attribute' => 'auth_role',
+                'value' => $model->authRoleLabel,
             ],
             [
                 'attribute' => 'status',

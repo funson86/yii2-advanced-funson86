@@ -1,6 +1,7 @@
 <?php
 namespace backend\models;
 
+use funson86\auth\models\AuthRole;
 use Yii;
 use yii\helpers\ArrayHelper;
 
@@ -25,6 +26,7 @@ class User extends \common\models\User
     public $repassword;
     private $_statusLabel;
     private $_roleLabel;
+    private $_authRoleLabel;
 
     /**
      * @inheritdoc
@@ -65,6 +67,21 @@ class User extends \common\models\User
         return $this->_roleLabel;
     }
 
+    public static function getArrayAuthRole()
+    {
+        return ArrayHelper::map(AuthRole::find()->all(), 'id', 'name');
+    }
+
+    public function getAuthRoleLabel()
+    {
+
+        if ($this->_authRoleLabel === null) {
+            $roles = self::getArrayAuthRole();
+            $this->_authRoleLabel = $roles[$this->auth_role];
+        }
+        return $this->_authRoleLabel;
+    }
+
     /**
       * @inheritdoc
       */
@@ -99,8 +116,8 @@ class User extends \common\models\User
     public function scenarios()
     {
         return [
-            'admin-create' => ['username', 'email', 'password', 'repassword', 'status', 'role'],
-            'admin-update' => ['username', 'email', 'password', 'repassword', 'status', 'role']
+            'admin-create' => ['username', 'email', 'password', 'repassword', 'status', 'role', 'auth_role'],
+            'admin-update' => ['username', 'email', 'password', 'repassword', 'status', 'role', 'auth_role']
         ];
     }
 
@@ -115,7 +132,7 @@ class User extends \common\models\User
             $labels,
             [
                 'password' => Yii::t('app', 'Password'),
-                'repassword' => Yii::t('app', 'Repassword')
+                'repassword' => Yii::t('app', 'Repassword'),
             ]
         );
     }

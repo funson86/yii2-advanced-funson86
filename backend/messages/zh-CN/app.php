@@ -58,7 +58,7 @@ return [
     'Repassword' => '确认密码',
     'Remember Me' => '自动登录',
     'Email' => '电子邮箱',
-    'Role' => '角色',
+    'Auth Role' => '角色',
     'Status' => '状态',
     'Created At' => '创建时间',
     'Updated At' => '更新时间',
