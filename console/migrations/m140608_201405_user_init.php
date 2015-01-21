@@ -17,6 +17,8 @@ class m140608_201405_user_init extends Migration
             'id' => Schema::TYPE_PK,
             'username' => Schema::TYPE_STRING . ' NOT NULL',
             'auth_key' => Schema::TYPE_STRING . '(32) NOT NULL',
+            'token' => Schema::TYPE_STRING . '(64)',
+            'access_token' => Schema::TYPE_STRING . '(255)',
             'password_hash' => Schema::TYPE_STRING . ' NOT NULL',
             'password_reset_token' => Schema::TYPE_STRING,
             'email' => Schema::TYPE_STRING . ' NOT NULL',
@@ -33,8 +35,40 @@ class m140608_201405_user_init extends Migration
         $this->createIndex('status', '{{%user}}', 'status');
         $this->createIndex('created_at', '{{%user}}', 'created_at');
 
+        //profile table
+        $this->createTable(
+            '{{%profile}}',
+            [
+                'user_id' => Schema::TYPE_PK,
+                'name' => Schema::TYPE_STRING . '(64)',
+                'surname' => Schema::TYPE_STRING . '(64)',
+                'avatar_url' => Schema::TYPE_STRING . '(64)'
+            ],
+            $tableOptions
+        );
+
+        // Foreign Keys
+        $this->addForeignKey('FK_profile_user', '{{%profile}}', 'user_id', '{{%user}}', 'id', 'CASCADE', 'CASCADE');
+
+        // Users emails table
+        $this->createTable(
+            '{{%user_email}}',
+            [
+                'user_id' => Schema::TYPE_INTEGER . ' NOT NULL',
+                'email' => Schema::TYPE_STRING . '(64)',
+                'token' => Schema::TYPE_STRING . '(64)',
+                'PRIMARY KEY (`user_id`, `token`)'
+            ],
+            $tableOptions
+        );
+
+        // Foreign Keys
+        $this->addForeignKey('FK_user_email_user', '{{%user_email}}', 'user_id', '{{%user}}', 'id', 'CASCADE', 'CASCADE');
+
+
         // Add super administrator
         $this->execute($this->getUserSql());
+        $this->execute($this->getProfileSql());
     }
 
     /**
@@ -49,8 +83,18 @@ class m140608_201405_user_init extends Migration
                 VALUES ('admin', 'admin@demo.com', '$auth_key', '$password_hash', '', 'admin', 1, $time, $time)";
     }
 
+    /**
+     * @return string SQL to insert first profile
+     */
+    private function getProfileSql()
+    {
+        return "INSERT INTO {{%profile}} (`user_id`, `name`, `surname`) VALUES (1, 'Administration', 'Site')";
+    }
+
     public function down()
     {
+        $this->dropTable('{{%user_email}}');
+        $this->dropTable('{{%profile}}');
         $this->dropTable('{{%user}}');
     }
 }

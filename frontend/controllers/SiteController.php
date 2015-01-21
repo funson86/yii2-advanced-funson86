@@ -1,6 +1,7 @@
 <?php
 namespace frontend\controllers;
 
+use common\models\Profile;
 use frontend\models\ChangePasswordForm;
 use Yii;
 use common\models\LoginForm;
@@ -185,6 +186,25 @@ class SiteController extends Controller
         }
 
         return $this->render('changePassword', [
+            'model' => $model,
+        ]);
+    }
+
+    public function actionProfile()
+    {
+        $model = Profile::findOne(['user_id' => Yii::$app->user->id]);
+        if (!$model) {
+            $model = new Profile();
+            $model->user_id = Yii::$app->user->id;
+        }
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->getSession()->setFlash('success', Yii::t('app', 'New password was saved.'));
+
+            return $this->goHome();
+        }
+
+        return $this->render('profile', [
             'model' => $model,
         ]);
     }

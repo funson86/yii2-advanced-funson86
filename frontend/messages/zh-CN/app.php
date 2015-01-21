@@ -83,7 +83,7 @@ return [
     'New password was saved.' => '已成功设置为新密码',
     'Reset password' => '重新设置密码',
     'Please choose your new password:' => '请输入你的新密码',
-    'Password reset token cannot be blank.' => '密码重置token不能为空',
+    'Password reset token cannot be blank.' => '密码重置token不能为空，请检查',
     'Wrong password reset token.' => '错误的密码重置token，请检查',
     'Save' => '保存',
     'Change Password' => '修改密码',
@@ -91,6 +91,10 @@ return [
     'New Password' => '新密码',
     'Incorrect old password.' => '当前密码不正确',
     'Please fill out the following fields to change password' => '请重复输入两次密码来修改密码',
+    'Profile' => '资料',
+    'Real Name' => '姓名',
+    'Surname' => '昵称',
+    'Avatar Url' => '头像',
 
 
 ];

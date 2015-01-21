@@ -72,12 +72,21 @@ class User extends ActiveRecord implements IdentityInterface
             'repassword' => Yii::t('app', 'Repassword'),
             'email' => Yii::t('app', 'Email'),
             'role' => Yii::t('app', 'Role'),
+            'auth_role' => Yii::t('app', 'Auth Role'),
             'status' => Yii::t('app', 'Status'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
             'create_user_id' => Yii::t('app', 'Create User Id'),
             'update_user_id' => Yii::t('app', 'Update User Id'),
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getProfile()
+    {
+        return $this->hasOne(Profile::className(), ['user_id' => 'id']);
     }
 
     /**
