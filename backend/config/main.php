@@ -11,7 +11,12 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
-    'modules' => [],
+    'modules' => [
+        'auth' => [
+            'class' => 'funson86\auth\Module',
+            'controllerNamespace' => 'funson86\auth\controllers'
+        ],
+    ],
     'components' => [
         'user' => [
             'identityClass' => 'common\models\User',
