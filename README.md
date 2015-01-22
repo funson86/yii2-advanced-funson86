@@ -1,97 +1,59 @@
-Yii 2 Advanced Application Template
-===================================
+Yii2-Advanced-funson86
+==========
 
-Yii 2 Advanced Application Template is a skeleton Yii 2 application best for
-developing complex Web applications with multiple tiers.
+Backend user & password:
+Login: `admin`
+Password: `qwe1234`
 
-The template includes three tiers: front end, back end, and console, each of which
-is a separate Yii application.
+Installation and getting started:
+---------------------------------
 
-The template is designed to work in a team development environment. It supports
-deploying the application in different environments.
+If you do not have Composer, you may install it by following the instructions at getcomposer.org.
 
-
-DIRECTORY STRUCTURE
--------------------
-
-```
-common
-    config/              contains shared configurations
-    mail/                contains view files for e-mails
-    models/              contains model classes used in both backend and frontend
-console
-    config/              contains console configurations
-    controllers/         contains console controllers (commands)
-    migrations/          contains database migrations
-    models/              contains console-specific model classes
-    runtime/             contains files generated during runtime
-backend
-    assets/              contains application assets such as JavaScript and CSS
-    config/              contains backend configurations
-    controllers/         contains Web controller classes
-    models/              contains backend-specific model classes
-    runtime/             contains files generated during runtime
-    views/               contains view files for the Web application
-    web/                 contains the entry script and Web resources
-frontend
-    assets/              contains application assets such as JavaScript and CSS
-    config/              contains frontend configurations
-    controllers/         contains Web controller classes
-    models/              contains frontend-specific model classes
-    runtime/             contains files generated during runtime
-    views/               contains view files for the Web application
-    web/                 contains the entry script and Web resources
-    widgets/             contains frontend widgets
-vendor/                  contains dependent 3rd-party packages
-environments/            contains environment-based overrides
-tests                    contains various tests for the advanced application
-    codeception/         contains tests developed with Codeception PHP Testing Framework
-```
+1. Run the following command: `php composer.phar create-project --stability=dev funson86/yii2-advanced-funson86 yii2-advanced` to install Yii2-Advanced-funson86.
+2. Run command: `cd /my/path/to/yii2-advanced/` and go to main application directory.
+3. Run command: `php requirements.php` and check the requirements.
+4. Run command: `php init` to initialize the application with a specific environment.
+5. Create a new database and adjust it configuration in `common/config/main-local.php` accordingly.
+6. Run command: `yii migrate` to apply migrations with console commands:
+   - m140608_201405_user_init : user table
+   - m140608_201406_rbac_init : rabc 4 tables of auth_assignment, auth_item, auth_item_child, auth_rule. same to yiisoft/yii2/rbac/migrations/schema-mysql.sql
+7. Run commond: `yii migrate --migrationPath=@funson86/auth/migrations` to apply https://github.com/funson86/yii2-auth
+8. This will create tables needed for the application to work.
+9. You also can use database dump from `my/path/to/yii2-adminlte/tests/yii2-advanced-funson86.sql`, but however I recommend to use migrations.
 
 
-REQUIREMENTS
-------------
-
-The minimum requirement by this application template that your Web server supports PHP 5.4.0.
-
-
-INSTALLATION
-------------
-
-### Install from an Archive File
-
-Extract the archive file downloaded from [yiiframework.com](http://www.yiiframework.com/download/) to
-a directory named `advanced` that is directly under the Web root.
-
-Then follow the instructions given in "GETTING STARTED".
+Usage
+-----
+- Use the URL `http://yii2-advanced-funson86.domain` point to `yii2-advanced-funson86/frontend/web/` to access application frontend.
+- Use the URL `http://backend.yii2-advanced-funson86.domain` point to `yii2-advanced-funson86/backend/web/` to access application backend.
 
 
-### Install via Composer
+Use yii2-auth
+-------------
+- To check weather show on top menu or side bar, add `'visible' => Yii::$app->user->can('readPost'),` in top-menu.php or sidebar-menu.php.
+- To check could run action. add `if(!Yii::$app->user->can('createPost')) throw new HttpException(401, 'No Auth');` in actionIndex, actionCreate, actionUpdate in XXXController.php file.
 
-If you do not have [Composer](http://getcomposer.org/), you may install it by following the instructions
-at [getcomposer.org](http://getcomposer.org/doc/00-intro.md#installation-nix).
+Notes:
+------
 
-You can then install the application using the following command:
+By default will be created one super admin user with login `admin` and password `qwe1234`, you can use this data to sing in application frontend and backend.
 
-~~~
-php composer.phar global require "fxp/composer-asset-plugin:1.0.0-beta4"
-php composer.phar create-project --prefer-dist --stability=dev yiisoft/yii2-app-advanced advanced
-~~~
+Themes:
+-------
+- Application backend it's based on "Yii2 Advanced Backend" template. More detail about this nice template you can find [here](http://www.bootstrapstage.com/admin-lte/).
+- Application frontend with default Yii2 advanced frontend page.
 
 
-GETTING STARTED
----------------
+Preview:
+-------
+![Yii2-Advanced](tests/yii2-advanced-preview.jpg)
 
-After you install the application, you have to conduct the following steps to initialize
-the installed application. You only need to do these once for all.
 
-1. Run command `init` to initialize the application with a specific environment.
-2. Create a new database and adjust the `components['db']` configuration in `common/config/main-local.php` accordingly.
-3. Apply migrations with console command `yii migrate`. This will create tables needed for the application to work.
-4. Set document roots of your Web server:
+Related:
+-------
+- [Yii2-Gii](https://github.com/funson86/yii2-gii) : Gii for Yii2-advanced-funson86
+- [Yii2-Setting](https://github.com/funson86/yii2-Setting) : Common Setting for Yii2
+- [Yii2-Blog](https://github.com/funson86/yii2-blog) : A Blog extension for Yii2
+- [Yii2-Cms](https://github.com/funson86/yii2-cms) : A Cms extension for Yii2
 
-- for frontend `/path/to/yii-application/frontend/web/` and using the URL `http://frontend/`
-- for backend `/path/to/yii-application/backend/web/` and using the URL `http://backend/`
-
-To login into the application, you need to first sign up, with any of your email address, username and password.
-Then, you can login into the application with same email address and password at any time.
