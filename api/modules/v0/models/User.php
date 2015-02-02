@@ -8,4 +8,9 @@ namespace api\modules\v0\models;
  */
 class User extends \common\models\User
 {
+    public static function findIdentityByAccessToken($token, $type = null)
+    {
+        return static::findOne(['access_token' => $token]);
+    }
+
 }

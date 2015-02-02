@@ -1,6 +1,9 @@
 <?php
 namespace api\modules\v1;
 
+use yii\filters\auth\HttpBasicAuth;
+use yii\filters\auth\QueryParamAuth;
+
 /**
  * iKargo API V1 Module
  * 
@@ -13,6 +16,17 @@ class Module extends \yii\base\Module
 
     public function init()
     {
-        parent::init();        
+        parent::init();
+        \Yii::$app->user->enableSession = false;
+    }
+
+    public function behaviors()
+    {
+        $behaviors = parent::behaviors();
+        $behaviors['authenticator'] = [
+            //'class' => HttpBasicAuth::className(),
+            'class' => QueryParamAuth::className(),
+        ];
+        return $behaviors;
     }
 }
