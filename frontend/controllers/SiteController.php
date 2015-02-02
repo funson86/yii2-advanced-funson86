@@ -2,6 +2,7 @@
 namespace frontend\controllers;
 
 use common\models\Profile;
+use vova07\fileapi\actions\UploadAction as FileAPIUpload;
 use frontend\models\ChangePasswordForm;
 use Yii;
 use common\models\LoginForm;
@@ -63,6 +64,10 @@ class SiteController extends Controller
             'captcha' => [
                 'class' => 'yii\captcha\CaptchaAction',
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
+            ],
+            'fileapi-upload' => [
+                'class' => FileAPIUpload::className(),
+                'path' => '@frontend/web/assets',
             ],
         ];
     }

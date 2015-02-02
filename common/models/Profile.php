@@ -6,6 +6,7 @@ use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\behaviors\BlameableBehavior;
 use yii\db\Expression;
+use vova07\fileapi\behaviors\UploadBehavior;
 
 /**
  * This is the model class for table "profile".
@@ -37,6 +38,16 @@ class Profile extends \yii\db\ActiveRecord
         return [
             //TimestampBehavior::className(),
             // BlameableBehavior::className(),
+            'uploadBehavior' => [
+                'class' => UploadBehavior::className(),
+                'attributes' => [
+                    'avatar_url' => [
+                        'path' => '@frontend/web/assets',
+                        'tempPath' => '@frontend/web/assets',
+                        'url' => '/yii2-funson86/frontend/web/assets',
+                    ]
+                ]
+            ]
         ];
     }
 

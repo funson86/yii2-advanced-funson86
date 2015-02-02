@@ -1,6 +1,7 @@
 <?php
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use vova07\fileapi\Widget;
 
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
@@ -17,7 +18,17 @@ $this->params['breadcrumbs'][] = $this->title;
             <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
                 <?= $form->field($model, 'name') ?>
                 <?= $form->field($model, 'surname') ?>
-                <?= $form->field($model, 'avatar_url') ?>
+                <?= $form->field($model, 'avatar_url')->widget(
+                    Widget::className(),
+                    [
+                        'settings' => [
+                            'url' => ['fileapi-upload']
+                        ],
+                        'crop' => true,
+                        'cropResizeWidth' => 100,
+                        'cropResizeHeight' => 100
+                    ]
+                )->label(false) ?>
                 <div class="form-group">
                     <?= Html::submitButton( Yii::t('app', 'Update'), ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
                 </div>
