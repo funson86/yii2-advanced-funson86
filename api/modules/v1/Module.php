@@ -2,7 +2,7 @@
 namespace api\modules\v1;
 
 use yii\filters\auth\HttpBasicAuth;
-use yii\filters\auth\QueryParamAuth;
+use api\components\QueryParamAuth;
 
 /**
  * iKargo API V1 Module
