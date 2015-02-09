@@ -41,12 +41,12 @@ class UserController extends ActiveController
         ];
     }
 
-    public function actionLogin()
+    /*public function actionLogin()
     {
         //return Yii::$app->request->post('username');
         return [
             'result' => 'success',
-            'access-token' => 'abc',
+            'access_token' => 'abc',
         ];
-    }
+    }*/
 }

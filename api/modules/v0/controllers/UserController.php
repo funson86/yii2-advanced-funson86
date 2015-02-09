@@ -20,7 +20,7 @@ class UserController extends Controller
     {
         $result = false;
         $token = '';
-        $accessToken = Yii::$app->request->get('access-token');
+        $accessToken = Yii::$app->request->get('access_token');
         if ($accessToken) {
             if (User::findOne(['access_token' => $accessToken])) {
                 $result = true;
@@ -43,7 +43,7 @@ class UserController extends Controller
         if ($result) {
             return [
                 'result' => 'success',
-                'access-token' => $token,
+                'access_token' => $token,
             ];
         } else {
             return [
