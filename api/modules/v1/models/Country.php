@@ -8,20 +8,20 @@ use \yii\db\ActiveRecord;
  */
 class Country extends ActiveRecord 
 {
-	/**
-	 * @inheritdoc
-	 */
-	public static function tableName()
-	{
-		return 'country';
-	}
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+        return 'country';
+    }
 
     /**
      * @inheritdoc
      */
     public static function primaryKey()
     {
-        return ['code'];
+        return ['id'];
     }
 
     /**

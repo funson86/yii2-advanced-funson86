@@ -2,7 +2,7 @@
 namespace api\modules\v1;
 
 use yii\filters\auth\HttpBasicAuth;
-use api\components\QueryParamAuth;
+use yii\filters\auth\QueryParamAuth;
 
 /**
  * iKargo API V1 Module
@@ -26,6 +26,7 @@ class Module extends \yii\base\Module
         $behaviors['authenticator'] = [
             //'class' => HttpBasicAuth::className(),
             'class' => QueryParamAuth::className(),
+            'tokenParam' => 'access_token',
         ];
         return $behaviors;
     }
