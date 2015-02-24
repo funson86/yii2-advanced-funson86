@@ -86,7 +86,7 @@ class User extends \common\models\User
     /**
      * @inheritdoc
      */
-    public function beforeSave($insert)
+    /*public function beforeSave($insert)
     {
         if (parent::beforeSave($insert)) {
             if ($this->isNewRecord || (!$this->isNewRecord && $this->password)) {
@@ -97,5 +97,5 @@ class User extends \common\models\User
             return true;
         }
         return false;
-    }
+    }*/
 }
