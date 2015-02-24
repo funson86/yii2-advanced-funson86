@@ -24,7 +24,7 @@ class m140608_201405_user_init extends Migration
             'email' => Schema::TYPE_STRING . ' NOT NULL',
             'role' => Schema::TYPE_STRING . '(64) NOT NULL DEFAULT "user"',
 
-            'status' => Schema::TYPE_SMALLINT . ' NOT NULL DEFAULT 10',
+            'status' => Schema::TYPE_SMALLINT . ' NOT NULL DEFAULT 1',
             'created_at' => Schema::TYPE_INTEGER . ' NOT NULL',
             'updated_at' => Schema::TYPE_INTEGER . ' NOT NULL',
         ], $tableOptions);
