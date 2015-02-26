@@ -55,7 +55,7 @@ class Catalog extends \yii\db\ActiveRecord
     /**
      * Get all children id as a array
      * Usage:
-     * $ids = Catalog::getCatalogIdStr($id, CmsCatalog::find()->all());
+     * $ids = Catalog::getCatalogIdStr($id, CmsCatalog::find()->asArray()->all());
      * $shows = CmsShow::find()->where(['catalog_id' => $ids,])->all();
      * @param int $parentId  parent catalog id
      * @param array $array  catalog array list
