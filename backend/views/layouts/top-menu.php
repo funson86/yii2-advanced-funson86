@@ -57,6 +57,10 @@ echo Nav::widget([
     'encodeLabels' => false,
 ]);
 $menuItems = [
+    [
+        'label' => Yii::t('app', 'Modify Password'),
+        'url' => ['site/change-password'],
+    ],
     ['label' => Yii::t('app', 'Home'), 'url' => ['/site/index']],
 ];
 if (Yii::$app->user->isGuest) {
