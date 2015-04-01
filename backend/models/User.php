@@ -53,7 +53,7 @@ class User extends \common\models\User
         ];
     }
 
-    public static function getArrayRole()
+    /*public static function getArrayRole()
     {
         return ArrayHelper::map(Yii::$app->authManager->getRoles(), 'name', 'description');
     }
@@ -63,10 +63,10 @@ class User extends \common\models\User
 
         if ($this->_roleLabel === null) {
             $roles = self::getArrayRole();
-            $this->_authRoleLabel = $this->auth_role ? $roles[$this->auth_role] : '-';
+            $this->_roleLabel = $roles[$this->role];
         }
         return $this->_roleLabel;
-    }
+    }*/
 
     public static function getArrayAuthRole()
     {
@@ -78,7 +78,7 @@ class User extends \common\models\User
 
         if ($this->_authRoleLabel === null) {
             $roles = self::getArrayAuthRole();
-            $this->_authRoleLabel = $roles[$this->auth_role];
+            $this->_authRoleLabel = $this->auth_role ? $roles[$this->auth_role] : '-';
         }
         return $this->_authRoleLabel;
     }
