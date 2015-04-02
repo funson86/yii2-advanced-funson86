@@ -77,11 +77,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         ['class' => 'form-control', 'prompt' => Yii::t('app', 'Please Filter')]
                     )
             ],
-            //'created_at',
-            [
-                'attribute' => 'created_at',
-                'format' => ['date', 'Y-M-d H:i:s'],
-            ],
+            'created_at:datetime',
             //'updated_at',
 
             ['class' => 'yii\grid\ActionColumn'],

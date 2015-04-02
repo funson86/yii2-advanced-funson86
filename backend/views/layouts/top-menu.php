@@ -59,7 +59,7 @@ echo Nav::widget([
 $menuItems = [
     [
         'label' => Yii::t('app', 'Modify Password'),
-        'url' => ['site/change-password'],
+        'url' => ['/site/change-password'],
     ],
     ['label' => Yii::t('app', 'Home'), 'url' => ['/site/index']],
 ];
