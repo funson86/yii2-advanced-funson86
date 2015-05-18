@@ -17,7 +17,6 @@ If you do not have Composer, you may install it by following the instructions at
 5. Create a new database and adjust it configuration in `common/config/main-local.php` accordingly.
 6. Run command: `yii migrate` to apply migrations with console commands:
    - m140608_201405_user_init : user table
-   - m140608_201406_rbac_init : rabc 4 tables of auth_assignment, auth_item, auth_item_child, auth_rule. same to yiisoft/yii2/rbac/migrations/schema-mysql.sql
 7. Run commond: `yii migrate --migrationPath=@funson86/auth/migrations` to apply https://github.com/funson86/yii2-auth
 8. This will create tables needed for the application to work.
 9. You also can use database dump from `my/path/to/yii2-adminlte/tests/yii2-advanced-funson86.sql`, but however I recommend to use migrations.
