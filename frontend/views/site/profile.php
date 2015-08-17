@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'cropResizeWidth' => 100,
                         'cropResizeHeight' => 100
                     ]
-                )->label(false) ?>
+                )->label(Yii::t('app', 'Avatar')) ?>
                 <div class="form-group">
                     <?= Html::submitButton( Yii::t('app', 'Update'), ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
                 </div>

@@ -94,7 +94,8 @@ return [
     'Profile' => '资料',
     'Real Name' => '姓名',
     'Surname' => '昵称',
-    'Avatar Url' => '头像',
+    'Avatar' => '头像',
+    'Avatar Url' => '头像地址',
     'New profile was saved.' => '已成功设置为新资料',
 
 
