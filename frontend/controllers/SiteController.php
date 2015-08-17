@@ -204,7 +204,7 @@ class SiteController extends Controller
         }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->getSession()->setFlash('success', Yii::t('app', 'New password was saved.'));
+            Yii::$app->getSession()->setFlash('success', Yii::t('app', 'New profile was saved.'));
 
             return $this->goHome();
         }

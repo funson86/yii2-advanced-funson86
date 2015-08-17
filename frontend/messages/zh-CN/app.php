@@ -95,6 +95,7 @@ return [
     'Real Name' => '姓名',
     'Surname' => '昵称',
     'Avatar Url' => '头像',
+    'New profile was saved.' => '已成功设置为新资料',
 
 
 ];
