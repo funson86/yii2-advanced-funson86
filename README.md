@@ -19,7 +19,8 @@ If you do not have Composer, you may install it by following the instructions at
    - m140608_201405_user_init : user table
 7. Run commond: `yii migrate --migrationPath=@funson86/auth/migrations` to apply https://github.com/funson86/yii2-auth
 8. This will create tables needed for the application to work.
-9. You also can use database dump from `my/path/to/yii2-adminlte/tests/yii2-advanced-funson86.sql`, but however I recommend to use migrations.
+9. You also can use database dump from `my/path/to/yii2-advanced/tests/yii2-advanced-funson86.sql`, but however I recommend to use migrations.
+10. You also can download from http://pan.baidu.com/s/1kT6FsoB, and the sql file is in the root path.
 
 
 Usage
