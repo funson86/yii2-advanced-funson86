@@ -25,7 +25,9 @@
         "yiisoft/yii2-debug": "*",
         "yiisoft/yii2-gii": "*",
         "yiisoft/yii2-faker": "*",
-        "funson86/yii2-auth": "*"
+        "funson86/yii2-auth": "*",
+        "funson86/yii2-setting": "*",
+        "funson86/yii2-gii": "*"
     },
     "config": {
         "process-timeout": 1800
