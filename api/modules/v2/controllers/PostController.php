@@ -6,18 +6,18 @@
  * Time: 17:08
  */
 
-namespace api\modules\v1\controllers;
+namespace api\modules\v2\controllers;
 
 use yii\rest\Controller;
 use yii\rest\ActiveController;
 use yii\web\Response;
 use yii\data\ActiveDataProvider;
-use api\modules\v1\models\Post;
+use api\modules\v2\models\Post;
 use yii\filters\auth\HttpBasicAuth;
 
 class PostController extends ActiveController
 {
-    public $modelClass = 'api\modules\v1\models\Post';
+    public $modelClass = 'api\modules\v2\models\Post';
     /*public $serializer = [
         'class' => 'yii\rest\Serializer',
         'collectionEnvelope' => 'items',

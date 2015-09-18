@@ -2,51 +2,53 @@
 namespace api\modules\v1\controllers;
 
 use Yii;
-use yii\rest\ActiveController;
-use yii\web\Response;
+use yii\rest\Controller;
+use common\models\User;
 
-class UserController extends ActiveController
+class UserController extends Controller
 {
     public $modelClass = 'api\modules\v1\models\User';
-    public $serializer = [
-        'class' => 'yii\rest\Serializer',
-        'collectionEnvelope' => 'items',
-    ];
 
     public function behaviors()
     {
         $behaviors = parent::behaviors();
-        $behaviors['contentNegotiator']['formats']['text/html'] = Response::FORMAT_JSON;
+        //$behaviors['contentNegotiator']['formats']['text/html'] = Response::FORMAT_JSON;
         return $behaviors;
     }
 
-    public function actionSearch($str)
+    public function actionLogin()
     {
-        return [
-            [
-                'id' => 5,
-                'version' => "5.5",
-                'name' => "Angry Birds",
-            ],
-            [
-                'id' => 6,
-                'version' => "6.5",
-                'name' => "Hello World",
-            ],
-            [
-                'id' => 7,
-                'version' => "7.5",
-                'name' => "Happy Sky",
-            ],
-        ];
-    }
+        $result = false;
+        $token = '';
+        $accessToken = Yii::$app->request->get('access_token');
+        if ($accessToken) {
+            if (User::findOne(['access_token' => $accessToken])) {
+                $result = true;
+            }
+        } elseif (Yii::$app->request->post('username') && Yii::$app->request->post('password')) {
+            $user = User::findByUsername(Yii::$app->request->post('username'));
 
-    /*public function actionLogin()
-    {
-        //return Yii::$app->request->post('username');
-        return [
-            'result' => 'success',
-            'access_token' => 'abc',
-        ];
-    }*/
+            if ($user && $user->validatePassword(Yii::$app->request->post('password'))) {
+                if ($user->access_token) {
+                    $token = $user->access_token;
+                } else {
+                    $token = hash('sha256', Yii::$app->request->get('username'));
+                    Yii::$app->db->createCommand()->update("user", ['access_token' => $token], 'id = ' . $user->id)->execute();
+                }
+
+                $result = true;
+            }
+        }
+
+        if ($result) {
+            return [
+                'result' => 'success',
+                'access_token' => $token,
+            ];
+        } else {
+            return [
+                'result' => 'failed',
+            ];
+        }
+    }
 }

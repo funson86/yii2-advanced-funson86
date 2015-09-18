@@ -23,11 +23,6 @@ class Module extends \yii\base\Module
     public function behaviors()
     {
         $behaviors = parent::behaviors();
-        $behaviors['authenticator'] = [
-            //'class' => HttpBasicAuth::className(),
-            'class' => QueryParamAuth::className(),
-            'tokenParam' => 'access_token',
-        ];
         return $behaviors;
     }
 }
